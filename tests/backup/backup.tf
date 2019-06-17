@@ -39,8 +39,7 @@ module "backup_plan" {
   iam_role_name = "${format("role-%s", random_string.r_string.result)}"
 
   resources = [
-    #Dynamo
-    "${module.db.table_arn}",
+    "${module.db.table_arn}"
   ]
 
   selection_tag = [

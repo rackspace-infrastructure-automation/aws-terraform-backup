@@ -21,13 +21,8 @@ module "backup" {
   //  iam_role_arn    = "arn:aws:iam::<account>:role/existingrolename-2019061715234345400"
 
   resources = [
-    #Dynamo
     "arn:aws:dynamodb:us-west-2:<account>:table/<table_name>",
-
-    # EFS
     "arn:aws:elasticfilesystem:us-west-2:<account>:file-system/fs-c9f44862",
-
-    # EBS
     "arn:aws:ec2:us-west-2:<account>:volume/vol-0589bb15c1d311dfa",
   ]
   selection_tag = [
