@@ -3,6 +3,11 @@ output "plan_arn" {
   value       = "${module.backup_plan.plan_arn}"
 }
 
+output "plan_id" {
+  description = "Plan ID."
+  value       = "${module.backup_plan.plan_id}"
+}
+
 output "plan_version" {
   description = "Unique, randomly generated, Unicode, UTF-8 encoded string that serves as the version ID of the backup plan."
   value       = "${module.backup_plan.plan_version}"

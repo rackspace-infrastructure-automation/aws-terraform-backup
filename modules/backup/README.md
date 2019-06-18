@@ -27,6 +27,7 @@
 | Name | Description |
 |------|-------------|
 | plan\_arn | Plan ARN. |
+| plan\_id | Plan ID |
 | plan\_version | Unique, randomly generated, Unicode, UTF-8 encoded string that serves as the version ID of the backup plan. |
 | selection\_id | Backup Selection identifier. |
 | vault\_arn | The ARN of the vault. |

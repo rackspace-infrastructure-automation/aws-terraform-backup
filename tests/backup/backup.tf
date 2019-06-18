@@ -4,7 +4,9 @@ provider "aws" {
 }
 
 resource "random_string" "r_string" {
-  length = 10
+  length  = 10
+  upper   = false
+  special = false
 }
 
 module "db" {
@@ -17,16 +19,14 @@ module "db" {
     },
   ]
 
-  environment          = "Test"
-  hash_key             = "MyHashKey"
+  hash_key             = "TestHashKey"
   read_capacity_units  = 5
-  table_name           = "${format("table-%s", random_string.r_string.result)}"
-  tags                 = { backup_it="all"}
+  table_name           = "${random_string.r_string.result}"
   write_capacity_units = 5
 }
 
 module "backup_plan" {
-  source = "../../module/modules/backup"
+  source = "../../modules/backup"
 
   # Plan
   plan_name = "${format("plan-%s", random_string.r_string.result)}"
