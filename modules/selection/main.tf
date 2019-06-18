@@ -16,5 +16,5 @@ resource "aws_backup_selection" "backup_selection" {
 
   selection_tag = "${var.selection_tag}"
 
-  resources = "${var.resources}"
+  resources = ["${var.resources}"]
 }
