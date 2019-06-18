@@ -38,9 +38,7 @@ module "backup_plan" {
 
   iam_role_name = "${format("role-%s", random_string.r_string.result)}"
 
-  resources = [
-    "${module.db.table_arn}"
-  ]
+  resources = "${list(format("%s", module.db.table_arn))}"
 
   selection_tag = [
     {
