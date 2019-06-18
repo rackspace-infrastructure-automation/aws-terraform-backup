@@ -26,7 +26,7 @@ module "db" {
 }
 
 module "backup_plan" {
-  source = "../../modules/backup"
+  source = "../../module/modules/backup"
 
   # Plan
   plan_name = "${format("plan-%s", random_string.r_string.result)}"
