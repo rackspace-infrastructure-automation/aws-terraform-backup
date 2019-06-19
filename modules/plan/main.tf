@@ -26,7 +26,7 @@ resource "aws_backup_plan" "backup_plan_lifecycle" {
 
     lifecycle {
       cold_storage_after = "${var.lifecycle_cold_storage_days}"
-      delete_after       = "${var.lifecycle_cold_storage_delete_days}"
+      delete_after       = "${var.lifecycle_delete_days}"
     }
 
     schedule            = "${var.schedule}"

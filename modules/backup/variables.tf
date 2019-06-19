@@ -98,7 +98,7 @@ variable "lifecycle_cold_storage_days" {
   default     = ""
 }
 
-variable "lifecycle_cold_storage_delete_days" {
+variable "lifecycle_delete_days" {
   description = "Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than lifecycle_cold_storage_days. `use_lifecycle` must be `true`."
   type        = "string"
   default     = ""

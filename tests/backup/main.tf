@@ -10,7 +10,7 @@ resource "random_string" "r_string" {
 }
 
 module "db" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-dynamo//?ref=v0.0.3"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-dynamo//?ref=master"
 
   attributes = [
     {
