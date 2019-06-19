@@ -35,5 +35,5 @@ output "vault_recovery_points" {
 
 output "backup_iam_role_arn" {
   description = "ARN for given IAM Role or newly created IAM Role."
-  value = "${module.selection.backup_iam_role_arn}"
+  value       = "${module.selection.backup_iam_role_arn}"
 }

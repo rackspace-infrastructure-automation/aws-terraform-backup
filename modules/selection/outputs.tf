@@ -5,5 +5,5 @@ output "selection_id" {
 
 output "backup_iam_role_arn" {
   description = "ARN for given IAM Role or newly created IAM Role."
-  value = "${var.create_iam_role ? module.backup_role.arn:var.iam_role_arn}"
+  value       = "${var.create_iam_role ? module.backup_role.arn:var.iam_role_arn}"
 }

@@ -14,5 +14,6 @@
 
 | Name | Description |
 |------|-------------|
+| backup\_iam\_role\_arn | ARN for given IAM Role or newly created IAM Role. |
 | selection\_id | Backup Selection identifier. |
 

@@ -4,7 +4,7 @@
 |------|-------------|:----:|:-----:|:-----:|
 | completion\_window | The amount of time AWS Backup attempts a backup before canceling the job and returning an error. Defaults to 8 hours. | string | `"480"` | no |
 | lifecycle\_cold\_storage\_days | Specifies the number of days after creation that a recovery point is moved to cold storage. `use_lifecycle` must be `true`. | string | `""` | no |
-| lifecycle\_cold\_storage\_delete\_days | Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than lifecycle_cold_storage_days. `use_lifecycle` must be `true`. | string | `""` | no |
+| lifecycle\_delete\_days | Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than lifecycle_cold_storage_days. `use_lifecycle` must be `true`. | string | `""` | no |
 | plan\_name | The display name of a backup plan. | string | n/a | yes |
 | plan\_tags | Map of Backup plan tags. i.e. { 'tag_name' = 'tag_value' } | map | `<map>` | no |
 | recovery\_point\_tags | Map of Metadata that you can assign to help organize the resources that you create. i.e. [{key = 'foo', value = 'bar'}]. | map | `<map>` | no |
