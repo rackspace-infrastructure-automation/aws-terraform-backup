@@ -10,6 +10,7 @@
 
 # Plans
 *.plans
+*.plan
 
 # Secrets
 secrets.tf
