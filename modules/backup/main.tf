@@ -59,14 +59,14 @@ module "plan" {
   target_vault_name = "${module.vault.vault_name}"
 
   #Optional
-  schedule                           = "${var.schedule}"
-  start_window                       = "${var.start_window}"
-  completion_window                  = "${var.completion_window}"
-  use_lifecycle                      = "${var.use_lifecycle}"
-  lifecycle_cold_storage_days        = "${var.lifecycle_cold_storage_days}"
-  lifecycle_cold_storage_delete_days = "${var.lifecycle_delete_days}"
-  plan_tags                          = "${var.plan_tags}"
-  recovery_point_tags                = "${var.recovery_point_tags}"
+  schedule                    = "${var.schedule}"
+  start_window                = "${var.start_window}"
+  completion_window           = "${var.completion_window}"
+  use_lifecycle               = "${var.use_lifecycle}"
+  lifecycle_cold_storage_days = "${var.lifecycle_cold_storage_days}"
+  lifecycle_delete_days       = "${var.lifecycle_delete_days}"
+  plan_tags                   = "${var.plan_tags}"
+  recovery_point_tags         = "${var.recovery_point_tags}"
 }
 
 module "selection" {
