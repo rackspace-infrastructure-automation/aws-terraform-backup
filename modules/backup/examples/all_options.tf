@@ -43,9 +43,11 @@ module "backup" {
   start_window      = 240
   completion_window = 600
   # Use Lifecycle Cold Storage
-  use_lifecycle                      = true
-  lifecycle_cold_storage_days        = 10
-  lifecycle_cold_storage_delete_days = 100
+  use_lifecycle = true
+  lifecycle = {
+    cold_storage_after = 10
+    delete_after       = 100
+  }
   recovery_point_tags = {
     recovery_tag_name = "recovery_tag_value"
   }
