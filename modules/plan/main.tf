@@ -24,10 +24,7 @@ resource "aws_backup_plan" "backup_plan_lifecycle" {
     rule_name         = "${var.rule_name}"
     target_vault_name = "${var.target_vault_name}"
 
-    lifecycle {
-      cold_storage_after = "${var.lifecycle_cold_storage_days}"
-      delete_after       = "${var.lifecycle_delete_days}"
-    }
+    lifecycle = ["${var.lifecycle}"]
 
     schedule            = "${var.schedule}"
     start_window        = "${var.start_window}"

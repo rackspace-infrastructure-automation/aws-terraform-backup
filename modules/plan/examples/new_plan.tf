@@ -27,7 +27,10 @@ module "backup_plan" {
   }
 
   # To use cold storage lifecycle
-  use_lifecycle                      = true
-  lifecycle_cold_storage_days        = "10"
-  lifecycle_cold_storage_delete_days = "100"
+  use_lifecycle = true
+
+  lifecycle = {
+    cold_storage_after = 10
+    delete_after       = 100
+  }
 }

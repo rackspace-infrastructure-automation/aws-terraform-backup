@@ -86,22 +86,26 @@ variable "completion_window" {
   default     = 480
 }
 
+variable "lifecycle" {
+  description = <<EOF
+  Optionally specify lifecycle configuration for the backup. `use_lifecycle` must be `true`.
+  cold_storage_after - (Optional) Specifies the number of days after creation that a recovery point is moved to cold storage.
+  delete_after (Optional) - Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+  Example:
+    lifecycle = {
+      cold_storage_after = 10
+      delete_after       = 100
+    }
+  EOF
+
+  type    = "map"
+  default = {}
+}
+
 variable "use_lifecycle" {
-  description = "The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Leave false to not use cold storage."
+  description = "Set to `true` if an input was provided for variable `lifecycle`."
   type        = "string"
   default     = false
-}
-
-variable "lifecycle_cold_storage_days" {
-  description = "Specifies the number of days after creation that a recovery point is moved to cold storage. `use_lifecycle` must be `true`."
-  type        = "string"
-  default     = ""
-}
-
-variable "lifecycle_delete_days" {
-  description = "Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than lifecycle_cold_storage_days. `use_lifecycle` must be `true`."
-  type        = "string"
-  default     = ""
 }
 
 variable "recovery_point_tags" {
