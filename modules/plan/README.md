@@ -11,7 +11,7 @@
 | schedule | A CRON expression specifying when AWS Backup initiates a backup job. Default is 05:00 UTC every day. Consult https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html for expression help. | string | `"cron(0 5 * * ? *)"` | no |
 | start\_window | The amount of time in minutes after a backup is scheduled before a job is canceled if it doesn't start successfully. Minimum and Default value is 60. Max is 720 (12 Hours). | string | `"60"` | no |
 | target\_vault\_name | The name of a logical container where backups are stored. | string | n/a | yes |
-| use\_lifecycle | Lifecycle defines backup expiration and cold storage migration. | string | `"false"` | no |
+| use\_lifecycle | Set to `true` if an input was provided for variable `lifecycle`. | string | `"false"` | no |
 
 ## Outputs
 

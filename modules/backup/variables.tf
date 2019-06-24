@@ -103,7 +103,7 @@ variable "lifecycle" {
 }
 
 variable "use_lifecycle" {
-  description = "Lifecycle defines backup expiration and cold storage migration."
+  description = "Set to `true` if an input was provided for variable `lifecycle`."
   type        = "string"
   default     = false
 }

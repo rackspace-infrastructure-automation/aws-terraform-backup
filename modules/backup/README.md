@@ -17,7 +17,7 @@
 | selection\_name | The display name of a resource selection document. | string | n/a | yes |
 | selection\_tag | List of Tag-based conditions used to specify a set of resources to assign to a backup plan. Must use `selection_tag` and/or `resources`. i.e.     [{       type = "STRINGEQUALS"       key   = "foo"       value = "bar"     }] | list | `<list>` | no |
 | start\_window | The amount of time in minutes after a backup is scheduled before a job is canceled if it doesn't start successfully. Minimum and Default value is 60. Max is 720 (12 Hours). | string | `"60"` | no |
-| use\_lifecycle | Lifecycle defines backup expiration and cold storage migration. | string | `"false"` | no |
+| use\_lifecycle | Set to `true` if an input was provided for variable `lifecycle`. | string | `"false"` | no |
 | vault\_name | Name of the backup vault to create. | string | n/a | yes |
 | vault\_tags | Map of Metadata that you can assign to help organize the resources that you create. i.e.   {     tag_name_one = "tag_value_one"     tag_name_two = "tag_value_two"   } | map | `<map>` | no |
 
