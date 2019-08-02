@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 module "backup" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup?ref=v0.0.1"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.0.3"
 
   # Plan
   plan_name = "newPlanName"
