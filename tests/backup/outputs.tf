@@ -1,3 +1,8 @@
+output "backup_iam_role_arn" {
+  description = "ARN for given IAM Role or newly created IAM Role."
+  value       = "${module.backup_plan.backup_iam_role_arn}"
+}
+
 output "plan_arn" {
   description = "Plan ARN."
   value       = "${module.backup_plan.plan_arn}"
@@ -31,9 +36,4 @@ output "vault_arn" {
 output "vault_recovery_points" {
   description = "The number of recovery points that are stored in a backup vault."
   value       = "${module.backup_plan.vault_recovery_points}"
-}
-
-output "backup_iam_role_arn" {
-  description = "ARN for given IAM Role or newly created IAM Role."
-  value       = "${module.backup_plan.backup_iam_role_arn}"
 }
