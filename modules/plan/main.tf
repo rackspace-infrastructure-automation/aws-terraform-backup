@@ -26,7 +26,7 @@
 // https://github.com/terraform-providers/terraform-provider-aws/issues/8431
 // https://github.com/terraform-providers/terraform-provider-aws/issues/8737
 
-resource "aws_backup_plan" "main" {
+resource "aws_backup_plan" "backup_plan" {
   count = "${var.lifecycle_enable ? 0 : 1}"
 
   name = "${var.plan_name}"
@@ -43,7 +43,7 @@ resource "aws_backup_plan" "main" {
   tags = "${var.tags}"
 }
 
-resource "aws_backup_plan" "main_with_lifecycle" {
+resource "aws_backup_plan" "backup_plan_lifecycle" {
   count = "${var.lifecycle_enable ? 1 : 0}"
 
   name = "${var.plan_name}"

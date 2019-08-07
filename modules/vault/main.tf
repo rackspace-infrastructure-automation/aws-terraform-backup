@@ -17,7 +17,7 @@
  * [Further examples available.](./examples)
  */
 
-resource "aws_backup_vault" "main" {
+resource "aws_backup_vault" "backup_vault" {
   name        = "${var.vault_name}"
   kms_key_arn = "${var.kms_key_arn}"
 

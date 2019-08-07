@@ -5,5 +5,5 @@ output "backup_iam_role_arn" {
 
 output "selection_id" {
   description = "Backup Selection identifier."
-  value       = "${aws_backup_selection.main.id}"
+  value       = "${aws_backup_selection.backup_selection.id}"
 }

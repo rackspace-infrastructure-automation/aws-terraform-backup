@@ -39,7 +39,7 @@ module "backup_role" {
   policy_arns_count = 1
 }
 
-resource "aws_backup_selection" "main" {
+resource "aws_backup_selection" "backup_selection" {
   iam_role_arn = "${var.create_iam_role ? module.backup_role.arn : local.default_role}"
   name         = "${var.selection_name}"
   plan_id      = "${var.plan_id}"
