@@ -5,7 +5,7 @@ provider "aws" {
 
 # Create a new Selection with an existing Role. For IAM Role details check out https://docs.aws.amazon.com/aws-backup/latest/devguide/access-control.html#managed-policies
 module "backup_selection" {
-  //  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/selection?ref=v0.0.1"
+  //  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/selection/?ref=v0.0.1"
   source = "../../../modules/selection"
 
   # Required
@@ -22,7 +22,11 @@ module "backup_selection" {
 
   # Required to have at least one of resources or selection_tag. You can use both fields together as well.
   resources = [
-    "arn:aws:dynamodb:us-west-2:794790922771:table/demo_table1",
+    "arn:aws:dynamodb:region:account-id:table/tablename",
+    "arn:aws:ec2:region:account-id:volume/volume-id",
+    "arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id",
+    "arn:aws:rds:region:account-id:db:db-instance-name",
+    "arn:aws:storagegateway:region:account-id:gateway/gateway-id/volume/volume-id",
   ]
   selection_tag = [
     {

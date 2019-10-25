@@ -3,7 +3,16 @@ provider "aws" {
   region  = "us-west-2"
 }
 
-resource "random_string" "r_string" {
+locals {
+  tags = {
+    Environment     = "Test"
+    Purpose         = "Testing aws-terraform-backup"
+    ServiceProvider = "Rackspace"
+    Terraform       = "true"
+  }
+}
+
+resource "random_string" "identifier" {
   length  = 10
   upper   = false
   special = false
@@ -21,24 +30,21 @@ module "db" {
 
   hash_key             = "TestHashKey"
   read_capacity_units  = 5
-  table_name           = "${random_string.r_string.result}"
+  table_name           = "${random_string.identifier.result}"
+  tags                 = "${local.tags}"
   write_capacity_units = 5
 }
 
 module "backup_plan" {
   source = "../../module/modules/backup"
 
-  # Plan
-  plan_name = "${format("plan-%s", random_string.r_string.result)}"
-  rule_name = "${format("rule-%s", random_string.r_string.result)}"
-
-  # Selection
-  # IAM Role Created
   create_iam_role = true
-
-  iam_role_name = "${format("role-%s", random_string.r_string.result)}"
-
-  resources = "${list(format("%s", module.db.table_arn))}"
+  iam_role_name   = "${format("role-%s", random_string.identifier.result)}"
+  plan_name       = "${format("plan-%s", random_string.identifier.result)}"
+  plan_tags       = "${local.tags}"
+  resources       = "${list(format("%s", module.db.table_arn))}"
+  rule_name       = "${format("rule-%s", random_string.identifier.result)}"
+  selection_name  = "${format("selection-%s", random_string.identifier.result)}"
 
   selection_tag = [
     {
@@ -48,8 +54,6 @@ module "backup_plan" {
     },
   ]
 
-  selection_name = "${format("selection-%s", random_string.r_string.result)}"
-
-  # Vault
-  vault_name = "${format("vault-%s", random_string.r_string.result)}"
+  vault_name = "${format("vault-%s", random_string.identifier.result)}"
+  vault_tags = "${local.tags}"
 }
