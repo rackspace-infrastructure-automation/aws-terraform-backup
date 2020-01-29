@@ -1,5 +1,5 @@
 provider "aws" {
-  version = "~> 2.14"
+  version = "~> 2.34"
   region  = "us-west-2"
 }
 
@@ -12,7 +12,7 @@ locals {
 }
 
 module "backup" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.0.3"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.12.0"
 
   environment = local.tags["Environment"]
 
@@ -39,4 +39,3 @@ module "backup" {
   vault_name   = "${local.tags["Environment"]}-Vault"
   vault_tags   = local.tags
 }
-

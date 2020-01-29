@@ -5,10 +5,18 @@
  *
  * ```HCL
  * module "backup_iam_role" {
- *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/iam_default/?ref=v0.0.3"
+ *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/iam_default/?ref=v0.12.0"
  * }
  * ```
  */
+
+terraform {
+  required_version = ">= 0.12"
+
+  required_providers {
+    aws = ">= 2.34.0"
+  }
+}
 
 data "aws_iam_policy_document" "backup_assume" {
   statement {

@@ -5,7 +5,7 @@
 * ## Basic Example
 * ```HCL
 * module "backup" {
-*   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.0.3"
+*   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.12.0"
 *
 *   iam_role_name = "newRolename"
 *   plan_name = "newPlanName"
@@ -37,6 +37,14 @@
 *
 * [Further examples available.](./examples)
 */
+
+terraform {
+  required_version = ">= 0.12"
+
+  required_providers {
+    aws = ">= 2.34.0"
+  }
+}
 
 locals {
   tags = {
@@ -83,4 +91,3 @@ module "selection" {
   resources       = var.resources
   selection_tag   = var.selection_tag
 }
-

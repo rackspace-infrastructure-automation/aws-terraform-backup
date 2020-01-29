@@ -1,5 +1,5 @@
 provider "aws" {
-  version = "~> 2.14"
+  version = "~> 2.34"
   region  = "us-west-2"
 }
 
@@ -12,7 +12,7 @@ locals {
 }
 
 module "efs" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-efs//?ref=v0.0.8"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-efs//?ref=v0.12.0"
 
   custom_tags = merge(
     local.tags,
@@ -27,7 +27,7 @@ module "efs" {
 }
 
 module "backup" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.0.3"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.12.0"
 
   completion_window = 300
   environment       = local.tags["Environment"]
@@ -56,4 +56,3 @@ module "backup" {
   vault_name   = "${local.tags["Environment"]}-Vault"
   vault_tags   = local.tags
 }
-

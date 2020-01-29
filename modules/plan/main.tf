@@ -5,7 +5,7 @@
  *
  * ```HCL
  * module "backup_plan" {
- *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/plan/?ref=v0.0.3"
+ *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/plan/?ref=v0.12.0"
  *
  *   lifecycle = {
  *     delete_after = 35
@@ -20,11 +20,18 @@
  *   target_vault_name = "${module.backup_vault.vault_name}"
  * }
  * ```
+ *
+ * Due to previous bugs [8431](https://github.com/terraform-providers/terraform-provider-aws/issues/8431) and [8737](https://github.com/terraform-providers/terraform-provider-aws/issues/8737)
+ * we need to set the minimum aws provider version at 2.34.0
  */
 
-// Currently a bug in updating plans with recovery tags. Need to destroy and recreate.
-// https://github.com/terraform-providers/terraform-provider-aws/issues/8431
-// https://github.com/terraform-providers/terraform-provider-aws/issues/8737
+terraform {
+  required_version = ">= 0.12"
+
+  required_providers {
+    aws = ">= 2.34.0"
+  }
+}
 
 resource "aws_backup_plan" "backup_plan" {
   count = var.lifecycle_enable ? 0 : 1
@@ -55,11 +62,6 @@ resource "aws_backup_plan" "backup_plan_lifecycle" {
     dynamic "lifecycle" {
       for_each = [var.lifecycle]
       content {
-        # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
-        # which keys might be set in maps assigned here, so it has
-        # produced a comprehensive set here. Consider simplifying
-        # this after confirming which keys can be set in practice.
-
         cold_storage_after = lookup(lifecycle.value, "cold_storage_after", null)
         delete_after       = lookup(lifecycle.value, "delete_after", null)
       }
@@ -73,4 +75,3 @@ resource "aws_backup_plan" "backup_plan_lifecycle" {
 
   tags = var.tags
 }
-

@@ -5,7 +5,7 @@
  *
  * ```HCL
  * module "backup_selection" {
- *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/selection/?ref=v0.0.3"
+ *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/selection/?ref=v0.12.0"
  *
  *   plan_id        = "${module.plan.plan_id}"
  *   resources      = []
@@ -23,6 +23,14 @@
  * [Further examples available.](./examples)
  */
 
+terraform {
+  required_version = ">= 0.12"
+
+  required_providers {
+    aws = ">= 2.34.0"
+  }
+}
+
 data "aws_caller_identity" "current" {
 }
 
@@ -31,7 +39,7 @@ locals {
 }
 
 module "backup_role" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-iam_resources//modules/role/?ref=v0.0.1"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-iam_resources//modules/role/?ref=v0.12.0"
 
   aws_service       = ["backup.amazonaws.com"]
   build_state       = var.create_iam_role
@@ -48,11 +56,6 @@ resource "aws_backup_selection" "backup_selection" {
   dynamic "selection_tag" {
     for_each = var.selection_tag
     content {
-      # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
-      # which keys might be set in maps assigned here, so it has
-      # produced a comprehensive set here. Consider simplifying
-      # this after confirming which keys can be set in practice.
-
       key   = selection_tag.value.key
       type  = selection_tag.value.type
       value = selection_tag.value.value
@@ -61,4 +64,3 @@ resource "aws_backup_selection" "backup_selection" {
 
   resources = var.resources
 }
-

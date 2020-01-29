@@ -1,10 +1,10 @@
 provider "aws" {
-  version = "~> 2.14"
+  version = "~> 2.34"
   region  = "us-west-2"
 }
 
 module "backup" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.0.3"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.12.0"
 
   # Plan
   plan_name = "newPlanName"
@@ -60,4 +60,3 @@ module "backup" {
   # Using a custom KMS key for encryption
   kms_key_arn = "arn:aws:kms:us-west-2:<account>:key/e267ea23-9d4d-a24e-247bc44f5fae"
 }
-

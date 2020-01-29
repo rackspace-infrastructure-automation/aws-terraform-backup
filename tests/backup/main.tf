@@ -1,5 +1,5 @@
 provider "aws" {
-  version = "~> 2.14"
+  version = "~> 2.34"
   region  = "us-west-2"
 }
 
@@ -57,4 +57,3 @@ module "backup_plan" {
   vault_name = format("vault-%s", random_string.identifier.result)
   vault_tags = local.tags
 }
-
