@@ -27,38 +27,50 @@
 // https://github.com/terraform-providers/terraform-provider-aws/issues/8737
 
 resource "aws_backup_plan" "backup_plan" {
-  count = "${var.lifecycle_enable ? 0 : 1}"
+  count = var.lifecycle_enable ? 0 : 1
 
-  name = "${var.plan_name}"
+  name = var.plan_name
 
   rule {
-    rule_name           = "${var.rule_name}"
-    target_vault_name   = "${var.target_vault_name}"
-    schedule            = "${var.schedule}"
-    start_window        = "${var.start_window}"
-    completion_window   = "${var.completion_window}"
-    recovery_point_tags = "${var.recovery_point_tags}"
+    rule_name           = var.rule_name
+    target_vault_name   = var.target_vault_name
+    schedule            = var.schedule
+    start_window        = var.start_window
+    completion_window   = var.completion_window
+    recovery_point_tags = var.recovery_point_tags
   }
 
-  tags = "${var.tags}"
+  tags = var.tags
 }
 
 resource "aws_backup_plan" "backup_plan_lifecycle" {
-  count = "${var.lifecycle_enable ? 1 : 0}"
+  count = var.lifecycle_enable ? 1 : 0
 
-  name = "${var.plan_name}"
+  name = var.plan_name
 
   rule {
-    rule_name         = "${var.rule_name}"
-    target_vault_name = "${var.target_vault_name}"
+    rule_name         = var.rule_name
+    target_vault_name = var.target_vault_name
 
-    lifecycle = ["${var.lifecycle}"]
+    dynamic "lifecycle" {
+      for_each = [var.lifecycle]
+      content {
+        # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
+        # which keys might be set in maps assigned here, so it has
+        # produced a comprehensive set here. Consider simplifying
+        # this after confirming which keys can be set in practice.
 
-    schedule            = "${var.schedule}"
-    start_window        = "${var.start_window}"
-    completion_window   = "${var.completion_window}"
-    recovery_point_tags = "${var.recovery_point_tags}"
+        cold_storage_after = lookup(lifecycle.value, "cold_storage_after", null)
+        delete_after       = lookup(lifecycle.value, "delete_after", null)
+      }
+    }
+
+    schedule            = var.schedule
+    start_window        = var.start_window
+    completion_window   = var.completion_window
+    recovery_point_tags = var.recovery_point_tags
   }
 
-  tags = "${var.tags}"
+  tags = var.tags
 }
+

@@ -33,6 +33,7 @@ module "backup" {
     },
   ]
   selection_name = "fullSelectionName"
+
   # Vault
   vault_name = "newVault"
   plan_tags = {
@@ -42,6 +43,7 @@ module "backup" {
   schedule          = "cron(0 12 * * ? *)"
   start_window      = 240
   completion_window = 600
+
   # Use Lifecycle Cold Storage
   use_lifecycle = true
   lifecycle = {
@@ -54,6 +56,8 @@ module "backup" {
   vault_tags = {
     vault_tag = "vault_tag_value"
   }
+
   # Using a custom KMS key for encryption
   kms_key_arn = "arn:aws:kms:us-west-2:<account>:key/e267ea23-9d4d-a24e-247bc44f5fae"
 }
+
