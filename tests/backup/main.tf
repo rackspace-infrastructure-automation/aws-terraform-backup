@@ -30,7 +30,7 @@ module "db" {
 
   hash_key             = "TestHashKey"
   read_capacity_units  = 5
-  table_name           = random_string.identifier.result
+  name                 = random_string.identifier.result
   tags                 = local.tags
   write_capacity_units = 5
 }
@@ -55,5 +55,30 @@ module "backup_plan" {
   ]
 
   vault_name = format("vault-%s", random_string.identifier.result)
+  vault_tags = local.tags
+}
+
+module "backup_plan_lifecycle" {
+  source = "../../module/modules/backup"
+
+  create_iam_role  = true
+  iam_role_name    = format("lifectcle-role-%s", random_string.identifier.result)
+  plan_name        = format("plan-%s", random_string.identifier.result)
+  plan_tags        = local.tags
+  resources        = [format("%s", module.db.table_arn)]
+  rule_name        = format("rule-%s", random_string.identifier.result)
+  selection_name   = format("selection-%s", random_string.identifier.result)
+  lifecycle_enable = true
+  lifecycle_bu     = { delete_after = 1 }
+
+  selection_tag = [
+    {
+      type  = "STRINGEQUALS"
+      key   = "backup_it"
+      value = "all"
+    },
+  ]
+
+  vault_name = format("vault_lifecycle-%s", random_string.identifier.result)
   vault_tags = local.tags
 }

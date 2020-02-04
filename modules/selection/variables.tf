@@ -1,6 +1,6 @@
 variable "create_iam_role" {
   description = "Create a new IAM role that AWS Backup uses to authenticate when backing up the target resource(s) using the default policy, `AWSBackupServiceRolePolicyForBackup`. Setting this to `true` must be accompanied by `iam_role_name`. If this is `false` and both `iam_role_arn` and `iam_role_name` are empty the module will attempt to use the default AWS Backup role, `AWSBackupDefaultServiceRole`."
-  type        = string
+  type        = bool
   default     = false
 }
 
@@ -42,7 +42,6 @@ variable "selection_tag" {
 EOF
 
 
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
-

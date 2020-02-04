@@ -32,7 +32,7 @@ module "backup" {
   completion_window = 300
   environment       = local.tags["Environment"]
 
-  lifecycle = {
+  lifecycle_bu = {
     cold_storage_after = 30
     delete_after       = 120
   }

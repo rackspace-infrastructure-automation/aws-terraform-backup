@@ -1,12 +1,12 @@
 variable "completion_window" {
   description = "The amount of time AWS Backup attempts a backup before canceling the job and returning an error. Defaults to 8 hours. Completion windows only apply to EFS backups."
-  type        = string
+  type        = number
   default     = 480
 }
 
 variable "create_iam_role" {
   description = "Create a new IAM role that AWS Backup uses to authenticate when backing up the target resource(s) using the default policy, `AWSBackupServiceRolePolicyForBackup`. Setting this to `true` must be accompanied by `iam_role_name`. If this is `false` and both `iam_role_arn` and `iam_role_name` are empty the module will attempt to use the default AWS Backup role, `AWSBackupDefaultServiceRole`."
-  type        = string
+  type        = bool
   default     = false
 }
 
@@ -34,7 +34,7 @@ variable "kms_key_arn" {
   default     = ""
 }
 
-variable "lifecycle" {
+variable "lifecycle_bu" {
   description = <<EOF
     Optionally specify a [lifecycle configuration](https://www.terraform.io/docs/providers/aws/r/backup_plan.html#lifecycle-arguments) map for the backup. `lifecycle_enable` must be `true`.<br>
     **cold_storage_after** - (Optional) Specifies the number of days after creation that a recovery point is moved to cold storage.<br>
@@ -49,7 +49,7 @@ EOF
 
 variable "lifecycle_enable" {
   description = "Set to `true` if an input was provided for variable `lifecycle`."
-  type        = string
+  type        = bool
   default     = false
 }
 
@@ -102,13 +102,13 @@ variable "selection_tag" {
 EOF
 
 
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
 
 variable "start_window" {
   description = "The amount of time in minutes after a backup is scheduled before a job is canceled if it doesn't start successfully. Minimum and Default value is 60. Max is 720 (12 Hours)."
-  type        = string
+  type        = number
   default     = 60
 }
 
@@ -123,4 +123,3 @@ variable "vault_tags" {
   type    = map(string)
   default = {}
 }
-

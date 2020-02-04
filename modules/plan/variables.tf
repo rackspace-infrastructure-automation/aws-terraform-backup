@@ -1,10 +1,10 @@
 variable "completion_window" {
   description = "The amount of time AWS Backup attempts a backup before canceling the job and returning an error. Defaults to 8 hours. Completion windows only apply to EFS backups."
-  type        = string
+  type        = number
   default     = 480
 }
 
-variable "lifecycle" {
+variable "lifecycle_bu" {
   description = <<EOF
     Optionally specify a [lifecycle configuration](https://www.terraform.io/docs/providers/aws/r/backup_plan.html#lifecycle-arguments) map for the backup. `lifecycle_enable` must be `true`.<br>
     **cold_storage_after** - (Optional) Specifies the number of days after creation that a recovery point is moved to cold storage.<br>
@@ -47,7 +47,7 @@ variable "schedule" {
 
 variable "start_window" {
   description = "The amount of time in minutes after a backup is scheduled before a job is canceled if it doesn't start successfully. Minimum and Default value is 60. Max is 720 (12 Hours)."
-  type        = string
+  type        = number
   default     = 60
 }
 
@@ -61,4 +61,3 @@ variable "target_vault_name" {
   description = "The name of the vault to be used for recovery points."
   type        = string
 }
-

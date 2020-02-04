@@ -4,6 +4,7 @@ output "plan_arn" {
     coalescelist(
       aws_backup_plan.backup_plan.*.arn,
       aws_backup_plan.backup_plan_lifecycle.*.arn,
+      ["NotCreated"]
     ),
     0,
   )
@@ -15,6 +16,7 @@ output "plan_id" {
     coalescelist(
       aws_backup_plan.backup_plan.*.id,
       aws_backup_plan.backup_plan_lifecycle.*.id,
+      ["NotCreated"]
     ),
     0,
   )
@@ -26,6 +28,7 @@ output "plan_name" {
     coalescelist(
       aws_backup_plan.backup_plan.*.name,
       aws_backup_plan.backup_plan_lifecycle.*.name,
+      ["NotCreated"]
     ),
     0,
   )
@@ -37,8 +40,8 @@ output "plan_version" {
     coalescelist(
       aws_backup_plan.backup_plan.*.version,
       aws_backup_plan.backup_plan_lifecycle.*.version,
+      ["NotCreated"]
     ),
     0,
   )
 }
-

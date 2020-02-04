@@ -23,6 +23,16 @@
  *
  * Due to previous bugs [8431](https://github.com/terraform-providers/terraform-provider-aws/issues/8431) and [8737](https://github.com/terraform-providers/terraform-provider-aws/issues/8737)
  * we need to set the minimum aws provider version at 2.34.0
+ *
+ * ## Terraform 0.12 upgrade
+ *
+ * Changes were required while adding terraform 0.12 compatibility.
+ *
+ * ### Module variables
+ *
+ * The following module variable was updated due to requirements for a reserved name:
+ *
+ * - `lifecycle` -> `lifecycle_bu`
  */
 
 terraform {
@@ -39,12 +49,12 @@ resource "aws_backup_plan" "backup_plan" {
   name = var.plan_name
 
   rule {
-    rule_name           = var.rule_name
-    target_vault_name   = var.target_vault_name
-    schedule            = var.schedule
-    start_window        = var.start_window
     completion_window   = var.completion_window
     recovery_point_tags = var.recovery_point_tags
+    rule_name           = var.rule_name
+    schedule            = var.schedule
+    start_window        = var.start_window
+    target_vault_name   = var.target_vault_name
   }
 
   tags = var.tags
@@ -60,7 +70,7 @@ resource "aws_backup_plan" "backup_plan_lifecycle" {
     target_vault_name = var.target_vault_name
 
     dynamic "lifecycle" {
-      for_each = [var.lifecycle]
+      for_each = [var.lifecycle_bu]
       content {
         cold_storage_after = lookup(lifecycle.value, "cold_storage_after", null)
         delete_after       = lookup(lifecycle.value, "delete_after", null)

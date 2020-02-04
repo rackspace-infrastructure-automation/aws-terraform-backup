@@ -46,7 +46,7 @@ module "backup" {
 
   # Use Lifecycle Cold Storage
   use_lifecycle = true
-  lifecycle = {
+  lifecycle_bu = {
     cold_storage_after = 10
     delete_after       = 100
   }

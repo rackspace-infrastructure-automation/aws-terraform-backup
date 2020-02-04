@@ -16,7 +16,7 @@ module "backup" {
 
   environment = local.tags["Environment"]
 
-  lifecycle = {
+  lifecycle_bu = {
     delete_after = 35
   }
 
