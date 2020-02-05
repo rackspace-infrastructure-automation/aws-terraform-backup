@@ -5,7 +5,7 @@
  *
  * ```HCL
  * module "backup_vault" {
- *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/vault/?ref=v0.0.3"
+ *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/vault/?ref=v0.12.0"
  *
  *   tags = {
  *     Environment = "${var.environment}"
@@ -17,9 +17,17 @@
  * [Further examples available.](./examples)
  */
 
-resource "aws_backup_vault" "backup_vault" {
-  name        = "${var.vault_name}"
-  kms_key_arn = "${var.kms_key_arn}"
+terraform {
+  required_version = ">= 0.12"
 
-  tags = "${var.tags}"
+  required_providers {
+    aws = ">= 2.34.0"
+  }
+}
+
+resource "aws_backup_vault" "backup_vault" {
+  name        = var.vault_name
+  kms_key_arn = var.kms_key_arn
+
+  tags = var.tags
 }

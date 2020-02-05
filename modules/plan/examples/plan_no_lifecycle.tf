@@ -1,10 +1,10 @@
 provider "aws" {
-  version = "~> 2.14"
+  version = "~> 2.34"
   region  = "us-west-2"
 }
 
 module "backup_plan" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/plan/?ref=v0.0.3"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/plan/?ref=v0.12.0"
 
   plan_name    = "newPlan"
   rule_name    = "newRule"

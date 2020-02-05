@@ -2,6 +2,8 @@
 
 This repository contains several Terraform modules that can be used to deploy parts of, or an entire, AWS Backup solution, such as AWS Backup Plans, Selections, and Vaults.  It also contains the AWS Backup module to combine all three to create a single simple deployment.
 
+Due to previous bugs [8431](https://github.com/terraform-providers/terraform-provider-aws/issues/8431) and [8737](https://github.com/terraform-providers/terraform-provider-aws/issues/8737) we need to set the minimum aws provider version at 2.34.0
+
 ## Module listing
 - [backup](./modules/backup) - A Terraform module that can be used to create a new Vault with a Backup Plan and Selection as well as creating a new IAM Backup Role.
 - [iam_default](./modules/iam_default) - A terraform module that can be used to create the default AWS Backup service role that would otherwise be created if deploying Backup for the first time via the console. The naming, description, and applied policies match what AWS provide for you on first use. Creating this default role aids use of this module in non-managed environments, as well as providing the default role that may be used when performing manual restore jobs.
@@ -11,3 +13,13 @@ This repository contains several Terraform modules that can be used to deploy pa
 
 ## Other TF Modules Used
 - Using [aws-terraform-iam_resources](https://github.com/rackspace-infrastructure-automation/aws-terraform-iam_resources) to create the AWS Backup Role if selected in Selection module.
+
+## Terraform 0.12 upgrade
+
+Changes were required while adding terraform 0.12 compatibility.
+
+### Module variables
+
+The following module variable was updated due to requirements for a reserved name:
+
+- `lifecycle` -> `lifecycle_bu`  

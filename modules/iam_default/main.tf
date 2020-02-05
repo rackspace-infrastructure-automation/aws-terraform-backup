@@ -5,10 +5,18 @@
  *
  * ```HCL
  * module "backup_iam_role" {
- *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/iam_default/?ref=v0.0.3"
+ *   source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/iam_default/?ref=v0.12.0"
  * }
  * ```
  */
+
+terraform {
+  required_version = ">= 0.12"
+
+  required_providers {
+    aws = ">= 2.34.0"
+  }
+}
 
 data "aws_iam_policy_document" "backup_assume" {
   statement {
@@ -25,15 +33,15 @@ resource "aws_iam_role" "backup_service" {
   name               = "AWSBackupDefaultServiceRole"
   description        = "Provides AWS Backup permission to create backups and perform restores on your behalf across AWS services."
   path               = "/service-role/"
-  assume_role_policy = "${data.aws_iam_policy_document.backup_assume.json}"
+  assume_role_policy = data.aws_iam_policy_document.backup_assume.json
 }
 
 resource "aws_iam_role_policy_attachment" "backup" {
-  role       = "${aws_iam_role.backup_service.name}"
+  role       = aws_iam_role.backup_service.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
 }
 
 resource "aws_iam_role_policy_attachment" "restore" {
-  role       = "${aws_iam_role.backup_service.name}"
+  role       = aws_iam_role.backup_service.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForRestores"
 }

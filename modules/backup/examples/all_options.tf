@@ -1,10 +1,10 @@
 provider "aws" {
-  version = "~> 2.14"
+  version = "~> 2.34"
   region  = "us-west-2"
 }
 
 module "backup" {
-  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.0.3"
+  source = "git@github.com:rackspace-infrastructure-automation/aws-terraform-backup//modules/backup/?ref=v0.12.0"
 
   # Plan
   plan_name = "newPlanName"
@@ -33,6 +33,7 @@ module "backup" {
     },
   ]
   selection_name = "fullSelectionName"
+
   # Vault
   vault_name = "newVault"
   plan_tags = {
@@ -42,9 +43,10 @@ module "backup" {
   schedule          = "cron(0 12 * * ? *)"
   start_window      = 240
   completion_window = 600
+
   # Use Lifecycle Cold Storage
   use_lifecycle = true
-  lifecycle = {
+  lifecycle_bu = {
     cold_storage_after = 10
     delete_after       = 100
   }
@@ -54,6 +56,7 @@ module "backup" {
   vault_tags = {
     vault_tag = "vault_tag_value"
   }
+
   # Using a custom KMS key for encryption
   kms_key_arn = "arn:aws:kms:us-west-2:<account>:key/e267ea23-9d4d-a24e-247bc44f5fae"
 }
