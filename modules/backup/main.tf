@@ -87,13 +87,13 @@ module "plan" {
 module "selection" {
   source = "../selection"
 
-  iam_role_arn   = var.iam_role_arn
-  iam_role_name  = var.iam_role_name
-  plan_id        = module.plan.plan_id
-  resources      = var.resources
-  selection_name = var.selection_name
-  selection_tag  = var.selection_tag
-
+  create_iam_role = var.create_iam_role
+  iam_role_arn    = var.iam_role_arn
+  iam_role_name   = var.iam_role_name
+  plan_id         = module.plan.plan_id
+  resources       = var.resources
+  selection_name  = var.selection_name
+  selection_tag   = var.selection_tag
 }
 
 module "vault" {
