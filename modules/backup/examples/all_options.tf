@@ -45,7 +45,7 @@ module "backup" {
   completion_window = 600
 
   # Use Lifecycle Cold Storage
-  use_lifecycle = true
+  lifecycle_enable = true
   lifecycle_bu = {
     cold_storage_after = 10
     delete_after       = 100
