@@ -44,8 +44,8 @@ module "backup_role" {
   aws_service       = ["backup.amazonaws.com"]
   build_state       = var.create_iam_role
   name              = var.iam_role_name
-  policy_arns       = ["arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"]
-  policy_arns_count = 1
+  policy_arns       = ["arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup", "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForRestores"]
+  policy_arns_count = 2
 }
 
 resource "aws_backup_selection" "backup_selection" {
