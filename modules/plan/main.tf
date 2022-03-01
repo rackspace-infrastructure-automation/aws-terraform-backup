@@ -40,6 +40,10 @@ resource "aws_backup_plan" "backup_plan" {
     recovery_point_tags = "${var.recovery_point_tags}"
   }
 
+  copy_action {
+    destination_vault_arn = var.destination_vault_arn
+  }
+
   tags = "${var.tags}"
 }
 

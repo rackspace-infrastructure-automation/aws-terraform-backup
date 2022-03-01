@@ -60,3 +60,8 @@ variable "target_vault_name" {
   description = "The name of the vault to be used for recovery points."
   type        = "string"
 }
+
+variable "destination_vault_arn" {
+  description = "The arn for the destination vault"
+  type        = "string"
+}
