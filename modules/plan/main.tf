@@ -38,10 +38,10 @@ resource "aws_backup_plan" "backup_plan" {
     start_window        = "${var.start_window}"
     completion_window   = "${var.completion_window}"
     recovery_point_tags = "${var.recovery_point_tags}"
-  }
 
-  copy_action {
-    destination_vault_arn = "${var.destination_vault_arn}"
+    copy_action {
+      destination_vault_arn = "${var.destination_vault_arn}"
+    }
   }
 
   tags = "${var.tags}"
