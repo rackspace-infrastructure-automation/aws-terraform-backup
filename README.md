@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This project is end of life. This repo will be deleted on June 2nd 2025.
+
 # aws-terraform-backup
 
 This repository contains several Terraform modules that can be used to deploy parts of, or an entire, AWS Backup solution, such as AWS Backup Plans, Selections, and Vaults.  It also contains the AWS Backup module to combine all three to create a single simple deployment.
